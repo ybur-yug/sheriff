@@ -25,15 +25,7 @@ defmodule Sheriff.Plug.EnforcePolicy do
   end
 
   defp fetch_actor(conn) do
-    case System.get_env("SHERIFF_RESOURCE_KEY") do
-      nil ->
-        actor = conn.private[:current_user]
-        {actor, conn}
-      string ->
-        resource_key = String.to_atom(string)
-        actor        = conn.private[resource_key]
-        {actor, conn}
-    end
+    {conn.private[:current_user], conn}
   end
 
   defp fetch_resource({nil, conn}, opts), do: handle_error(:unauthenticated, conn, opts)

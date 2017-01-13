@@ -22,10 +22,9 @@ If [available in Hex](https://hex.pm/docs/publish), the package can be installed
     end
     ```
 
-## Resource Key
+## Current User
 
-Sheriff relies on a resource name being given to use as the key in which it derives certain data from the `Plug.Conn.private` map.
-If there is no environment variable set to `SHERIFF_RESOURCE_KEY`, it will default to `:current_user`.
+Sheriff relies on the the `:current_user` key being set in the `Plug.Conn.private` map.
 
 ## Resource Loading
 
@@ -94,12 +93,5 @@ Within Sheriff there are three error scenerios we want to address:
 We'll want to provide a handler to Sheriff.  A handler is any module that
 implements `resource_missing/1`, `unauthenticated/1`, and `unauthorized/1`;
 you may can use the `Sheriff.Handler` behaviour if you'd like.
-Then, simply add it to your router (if it was called `API.ErrorHandler`):
-
-```elixir
-config :sheriff,
-  handler: API.ErrorHandler
-```
 
 That's it!
-Check out our example application [here](TODO+PUSH_EXAMPLE_APP).
